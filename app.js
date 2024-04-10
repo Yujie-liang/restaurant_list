@@ -12,8 +12,15 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
   res.redirect('/restaurants')
 })
+
 app.get('/restaurants', (req, res) => {
   res.render('index', { restaurants })
+})
+
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id;
+  const restaurant = restaurants.find((rs) => rs.id.toString() === id)
+  res.render('detail', { restaurant })
 })
 app.listen(port, () => {
   console.log(`express server is running on http://localhost:${port}`)
