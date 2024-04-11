@@ -27,8 +27,9 @@ app.get('/search', (req, res) => {
       return false;
     })
   ) : restaurants;
-  console.log(keyword);
-  res.render('index', { restaurants: matchedRestaurants, keyword })
+  //若keyword = ''，alert：沒有符合的餐廳
+  const noResult = matchedRestaurants.length === 0;
+  res.render('index', { restaurants: matchedRestaurants, keyword, noResult })
 })
 
 app.get('/restaurants/:id', (req, res) => {
